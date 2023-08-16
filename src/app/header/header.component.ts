@@ -7,4 +7,8 @@ import { Component, Input } from '@angular/core';
 })
 export class HeaderComponent {
   @Input() pageTitle!: string;
+
+  logOut(){
+    localStorage.clear();
+  }
 }

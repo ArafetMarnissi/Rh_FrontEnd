@@ -1,0 +1,141 @@
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+    data-sidebar-position="fixed" data-header-position="fixed">
+    <div
+      class="position-relative overflow-hidden radial-gradient min-vh-100 d-flex align-items-center justify-content-center">
+      <div class="d-flex align-items-center justify-content-center w-100">
+        <div class="row justify-content-center w-100">
+          <div class="col-md-8 col-lg-6 col-xxl-3">
+            <div class="card mb-0">
+              <div class="card-body">
+                <a href="./index.html" class="text-nowrap logo-img text-center d-block py-3 w-100">
+                  <img src="assets/images/logos/dark-logo.svg" width="180" alt="">
+                </a>
+                <p class="text-center">Your Social Campaigns</p>
+                <form novalidate [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+                  <div class="mb-3">
+                    <label for="firstName" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="firstName" formControlName="firstName" aria-describedby="textHelp">
+                    <span class="form-text text-danger" *ngIf="FirstName.errors?.['required'] && FirstName.touched">first name is required</span>
+                    <span class="form-text text-danger" *ngIf="FirstName.errors?.['pattern']">first name is invalid</span>
+                  </div>
+                  <div class="mb-3">
+                    <label for="lastName" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="lastName" formControlName="lastName" aria-describedby="textHelp">
+                    <span class="form-text text-danger" *ngIf="LastName.errors?.['required'] && LastName.touched">last name is required</span>
+                    <span class="form-text text-danger" *ngIf="LastName.errors?.['pattern']">last name is invalid</span>
+                    
+                  </div>
+                  <div class="mb-3">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="email" class="form-control" id="email" formControlName="email" aria-describedby="emailHelp">
+                    <span class="form-text text-danger" *ngIf="Email.errors?.['required']&& Email.touched">email is required</span>
+                    <span class="form-text text-danger" *ngIf="Email.errors?.['pattern']">email is invalid</span>
+                    <span class="form-text text-danger" *ngIf="Email.errors?.['emailTaken']">Email is already taken</span>
+                    
+
+                  </div>
+                  <div class="mb-4">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" formControlName="password">
+                    <span class="form-text text-danger" *ngIf="Password.errors?.['required'] && Password.touched">password is required</span>
+                    
+                  </div>
+                  <div class="mb-4">
+                    <label for="confirmPassword" class="form-label">Confirm Password</label>
+                    <input type="confirmPassword" class="form-control" id="confirmPassword" formControlName="confirmPassword">
+                    <span class="form-text text-danger" *ngIf="ConfirmPassword.errors?.['required'] && ConfirmPassword.touched && !passwordMatchValidator()">
+                      confirm password is required</span>
+                      <span class="form-text text-danger" *ngIf="passwordMatchValidator() && ConfirmPassword.touched">
+                       password and confirm password does not match</span>
+
+                    
+                  </div>
+                  <button type="submit" [disabled]="passwordMatchValidator() || !(signupForm.valid && signupForm.dirty)" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Sign Up</button>
+                  <div class="d-flex align-items-center justify-content-center">
+                    <p class="fs-4 mb-0 fw-bold">Already have an Account?</p>
+                    <a class="text-primary fw-bold ms-2" href="login">Sign In</a>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+    data-sidebar-position="fixed" data-header-position="fixed">
+    <div
+      class="position-relative overflow-hidden radial-gradient min-vh-100 d-flex align-items-center justify-content-center">
+      <div class="d-flex align-items-center justify-content-center w-100">
+        <div class="row justify-content-center w-100">
+          <div class="col-md-8 col-lg-6 col-xxl-3">
+            <div class="card mb-0">
+              <div class="card-body">
+                <a href="./index.html" class="text-nowrap logo-img text-center d-block py-3 w-100">
+                  <img src="assets/images/logos/dark-logo.svg" width="180" alt="">
+                </a>
+                <p class="text-center">Your Social Campaigns</p>
+                <form novalidate [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                  <div class="mb-3">
+                    <label for="firstName" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="firstName" formControlName="firstName" aria-describedby="textHelp">
+                    <span class="form-text text-danger" *ngIf="FirstName.errors?.['required']">first name is required</span>
+                  </div>
+                  <div class="mb-3">
+                    <label for="lastName" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="lastName" formControlName="lastName" aria-describedby="textHelp">
+                    <span class="form-text text-danger" *ngIf="LastName.errors?.['required'] && LastName.touched">last name is required</span>
+                    
+                  </div>
+                  <div class="mb-3">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="email" class="form-control" id="email" formControlName="email" aria-describedby="emailHelp">
+                    <span class="form-text text-danger" *ngIf="Email.errors?.['required']">email is required</span>
+                    <span class="form-text text-danger" *ngIf="Email.errors?.['email']">email is invalid</span>
+                    <span class="form-text text-danger" *ngIf="Email.errors?.['emailTaken']">Email is already taken</span>
+                    
+
+                  </div>
+                  <div class="mb-4">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" formControlName="password">
+                    <span class="form-text text-danger" *ngIf="Password.errors?.['required']">password is required</span>
+                    
+                  </div>
+                  <div class="mb-4">
+                    <label for="confirmPassword" class="form-label">Confirm Password</label>
+                    <input type="confirmPassword" class="form-control" id="confirmPassword" formControlName="confirmPassword">
+                    <span class="form-text text-danger" *ngIf="ConfirmPassword.errors?.['required'] || registerForm.hasError('passwordMismatch')">
+                    {{ ConfirmPassword.errors?.['required'] ? 'Confirm password is required' : 'Repeat Password is invalid' }}</span>
+                    
+
+                    
+                  </div>
+                  <button type="submit" [disabled]="registerForm.invalid" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Sign Up</button>
+                  <div class="d-flex align-items-center justify-content-center">
+                    <p class="fs-4 mb-0 fw-bold">Already have an Account?</p>
+                    <a class="text-primary fw-bold ms-2" href="login">Sign In</a>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->

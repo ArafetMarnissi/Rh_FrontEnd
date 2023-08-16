@@ -1,3 +1,42 @@
-<div class="app">
-  
+
+
+
+ <!-- Body Wrapper
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+      data-sidebar-position="fixed" data-header-position="fixed" *ngIf="this.app.affichage=='true'">
+      <app-sidebar-nav/>
+      <div class="body-wrapper">
+          <app-header/>
+        <div class="container-fluid">
+          <app-home *ngIf="app.affichageHome === 'true'"></app-home>
+        </div>
+      </div>
+      
+      
 </div>
+<router-outlet/>  -->
+
+<!--  Body Wrapper -->
+<!-- <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+      data-sidebar-position="fixed" data-header-position="fixed">
+      <app-sidebar-nav/>
+      <div class="body-wrapper">
+          <app-header/>
+        <div class="container-fluid">
+          <app-home *ngIf="app.affichageHome === true"></app-home>
+        </div>
+      </div>
+</div> -->
+<!-- <app-dashboard *ngIf="globalData.userLoggedIn"></app-dashboard> -->
+<!-- Afficher la page de connexion uniquement si l'utilisateur n'est pas connecté -->
+<!-- <app-login ></app-login> -->
+<!-- <app-dashboard/> -->
+<!-- <app-login *ngIf="! isLoggedIn()"/> -->
+<router-outlet/>
+<ngx-ui-loader></ngx-ui-loader>
+
+
+
+
+
+

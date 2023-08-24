@@ -42,4 +42,18 @@ export class AxiosService {
       headers: headers
     });
    }
+   requestByincludeHeaders(method: string, url: string, data: any,includeAuthHeaders: boolean = true,token:any): Promise<any>{
+    let headers ={};
+    
+    if(includeAuthHeaders && token!== null){
+      headers = {"Authorization":"Bearer " + token};
+    }
+
+    return axios({
+      method: method,
+      url: url,
+      data: data,
+      headers: headers
+    });
+   }
 }

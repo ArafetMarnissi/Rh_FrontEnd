@@ -23,6 +23,7 @@ export class RegisterComponent implements OnInit {
   confirmpassword = true;
   signupForm: any = FormGroup;
   responseMessage: any;
+  passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[\W_]).{8,}$/
 
   constructor(public app: AppServiceService,
     private axiosService: AxiosService,
@@ -31,9 +32,10 @@ export class RegisterComponent implements OnInit {
     private ngxService: NgxUiLoaderService,
     private formBuilder: FormBuilder,
     private snackBarSer: SnackbarService,
-    private userService: UserService
+    
 
   ) { }
+
 
   // Méthode de validation asynchrone pour vérifier l'unicité de l'email
   validateEmailUniqueness(): AsyncValidatorFn {
@@ -54,7 +56,7 @@ export class RegisterComponent implements OnInit {
       firstName: [null, [Validators.required, Validators.pattern(GlobalConstants.nameRegex)]],
       lastName: [null, [Validators.required, Validators.pattern(GlobalConstants.nameRegex)]],
       email: [null, [Validators.required, Validators.pattern(GlobalConstants.emailRegex)], this.validateEmailUniqueness()],
-      password: [null, [Validators.required, Validators.minLength(8)]],
+      password: [null, [Validators.required, Validators.pattern(this.passwordPattern)]],
       confirmPassword: [null, [Validators.required, Validators.minLength(8)]]
     })
 
@@ -70,25 +72,6 @@ export class RegisterComponent implements OnInit {
       return false;
     }
   }
-//   onSubmit():void{
-//     if (this.signupForm.valid) {
-//   this.ngxService.start();
-//     this.userService.register(this.signupForm.value
-//     ).subscribe((response :any )=>{
-//       alert(response);
-//       this.ngxService.stop();
-//       this.router.navigate(['/login']);
-
-//     },(error)=>{
-//       this.ngxService.stop();
-//       //this.snackBarSer.openSnackBar(this.responseMessage, GlobalConstants.error);
-//       console.log(
-//         error
-//         );
-//     }
-//     );
-//   }
-// }
 
   onSubmit() {
     if (this.signupForm.valid) {
@@ -101,13 +84,13 @@ export class RegisterComponent implements OnInit {
         "POST",
         "/api/auth/register", credentials, false
       ).then(response => {
-        alert(response);
         this.ngxService.stop();
         this.router.navigate(['login']);
-
+        
+        this.snackBarSer.openSnackBar("user added seccessfuly","close");
       }, (error) => {
         this.ngxService.stop();
-        console.log(error);
+        this.snackBarSer.openSnackBar(error.response.data.message,"close");
 
       });
     }else{

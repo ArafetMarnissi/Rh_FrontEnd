@@ -4,12 +4,12 @@
       class="position-relative overflow-hidden radial-gradient min-vh-100 d-flex align-items-center justify-content-center">
       <div class="d-flex align-items-center justify-content-center w-100">
         <div class="row justify-content-center w-100">
-          <div class="col-md-8 col-lg-6 col-xxl-3">
+          <div class="col-md-8 col-lg-6 col-xxl-4">
             <div class="card mb-0">
               <div class="card-body">
-                <a href="./index.html" class="text-nowrap logo-img text-center d-block py-3 w-100">
+                <div class="text-nowrap logo-img text-center d-block py-3 w-100">
                   <img src="assets/images/logos/dark-logo.svg" width="180" alt="">
-                </a>
+                </div>
                 <p class="text-center">Your Social Campaigns</p>
                 <form novalidate [formGroup]="signupForm" (ngSubmit)="onSubmit()">
                   <div class="mb-3">
@@ -38,11 +38,13 @@
                     <label for="password" class="form-label">Password</label>
                     <input type="password" class="form-control" id="password" formControlName="password">
                     <span class="form-text text-danger" *ngIf="Password.errors?.['required'] && Password.touched">password is required</span>
-                    
+                    <span class="form-text text-danger"
+                                            *ngIf="Password.errors?.['pattern'] && Password.touched">Minimum eight characters, at least
+                                            one letter and one number</span>
                   </div>
                   <div class="mb-4">
                     <label for="confirmPassword" class="form-label">Confirm Password</label>
-                    <input type="confirmPassword" class="form-control" id="confirmPassword" formControlName="confirmPassword">
+                    <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword">
                     <span class="form-text text-danger" *ngIf="ConfirmPassword.errors?.['required'] && ConfirmPassword.touched && !passwordMatchValidator()">
                       confirm password is required</span>
                       <span class="form-text text-danger" *ngIf="passwordMatchValidator() && ConfirmPassword.touched">
@@ -53,7 +55,7 @@
                   <button type="submit" [disabled]="passwordMatchValidator() || !(signupForm.valid && signupForm.dirty)" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Sign Up</button>
                   <div class="d-flex align-items-center justify-content-center">
                     <p class="fs-4 mb-0 fw-bold">Already have an Account?</p>
-                    <a class="text-primary fw-bold ms-2" href="login">Sign In</a>
+                    <a class="text-primary fw-bold ms-2" routerLink="/login">Sign In</a>
                   </div>
                 </form>
               </div>

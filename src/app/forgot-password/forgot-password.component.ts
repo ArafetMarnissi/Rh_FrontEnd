@@ -44,11 +44,11 @@ export class ForgotPasswordComponent implements OnInit {
       "/api/user/forgotPassword",this.forgotPasswordForm.value,false
     ).then(response => {
       this.ngxService.stop();
-      this.router.navigate(['login']); // Naviguez vers la nouvelle route en cas de succès
+      this.responseMessage=response.data.message; // Naviguez vers la nouvelle route en cas de succès
     }).catch(error => {
         this.ngxService.stop();
-        if (error.error?.message) {
-          this.responseMessage = error.error?.message;
+        if (error.response.data.message) {
+          this.responseMessage = error.response.data.message;
         }
         else {
           this.responseMessage = GlobalConstants.genericError;

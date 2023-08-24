@@ -10,6 +10,7 @@ import { SnackbarService } from '../service/snackbar.service';
 import { ValidationService } from '../service/validation.service';
 import { AuthService } from '../service/auth.service';
 import { UserService } from '../service/user.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,7 @@ import { UserService } from '../service/user.service';
 export class LoginComponent  implements OnInit {
 
   loginForm:any = FormGroup;
-  responseMessage: any;
+  responseMessage: any="";
   role:any;
   
   @Output() onSubmitLoginEvent = new EventEmitter();
@@ -29,12 +30,22 @@ export class LoginComponent  implements OnInit {
     private router: Router,
     private formBuilder:FormBuilder,
     private ngxService: NgxUiLoaderService,
-    private snackBarSer: SnackbarService,
+    private snackbarService: SnackbarService,
     public validationService:ValidationService,
     public authService : AuthService,
     private userService :UserService
     ){}
   ngOnInit() {
+      if (this.authService.checkToken() === true) {
+        this.router.navigateByUrl('dashboard');
+      }
+    
+   
+    
+    
+    
+    
+    
     // this.validationService.checkToken().subscribe((response :any) =>{
     //   this.router.navigate(['dashboard']);
     // },(error:any)=>{
@@ -51,7 +62,7 @@ export class LoginComponent  implements OnInit {
   }
   onSubmitLogin():void{
     if (this.loginForm.valid) {
-  this.ngxService.start();
+    this.ngxService.start();
     this.userService.login(this.loginForm.value
     ).subscribe((response :any )=>{
       this.authService.setAuthToken(response.token);
@@ -59,17 +70,14 @@ export class LoginComponent  implements OnInit {
       this.authService.setRoles(this.role);
       this.ngxService.stop();
       if(this.role==='ADMIN'){
-        this.router.navigate(['/dashboard']); // Naviguez vers la nouvelle route en cas de succès
+        this.router.navigateByUrl('userList'); // Naviguez vers la nouvelle route en cas de succès
       }else{
-        this.router.navigate(['/button']); // Naviguez vers la nouvelle route en cas de succès
+        this.router.navigateByUrl('PointageUser'); // Naviguez vers la nouvelle route en cas de succès
       }
     },(error)=>{
       this.ngxService.stop();
-     
-      this.snackBarSer.openSnackBar(this.responseMessage, GlobalConstants.error);
-      console.log(
-        error
-        );
+      this.responseMessage=error
+      console.log(error);
     }
     );
   }
@@ -88,16 +96,19 @@ export class LoginComponent  implements OnInit {
   //     "POST",
   //     "/api/auth/authenticate",this.loginForm.value,false
   //   ).then(response => {
-  //     this.axiosService.setAuthToken(response.data.token);
-  //     console.log(this.authService.decodeToken(response.data.token));
-  //     this.role=this.authService.decodeToken(response.data.token);
-  //     this.authService.setRoles(this.role);
-  //     this.ngxService.stop();
-  //     if(this.role==='ADMIN'){
+  //      this.axiosService.setAuthToken(response.data.token);
+  //      console.log(this.authService.decodeToken(response.data.token));
+  //      this.role=this.authService.decodeToken(response.data.token);
+  //      this.authService.setRoles(this.role);
+  //      this.ngxService.stop();
+  //      if(this.role==='ADMIN'){
+        
+  //        this.router.navigate(['/dashboard']); // Naviguez vers la nouvelle route en cas de succès
+  //      }else{
+  //       this.app.affichageHome=true;
   //       this.router.navigate(['/dashboard']); // Naviguez vers la nouvelle route en cas de succès
-  //     }else{
-  //       this.router.navigate(['/button']); // Naviguez vers la nouvelle route en cas de succès
-  //     }
+  //      }
+  //     // this.router.navigate(['/alerts']);
       
   //   }).catch(error => {
   //       this.ngxService.stop();
@@ -108,7 +119,7 @@ export class LoginComponent  implements OnInit {
   //       else {
   //         this.responseMessage = GlobalConstants.genericError;
   //       }
-  //       this.snackBarSer.openSnackBar(this.responseMessage, GlobalConstants.error);
+      
       
   //     // Afficher un message d'erreur à l'utilisateur ici
   //   });}else{console.log("erreur de connection");}

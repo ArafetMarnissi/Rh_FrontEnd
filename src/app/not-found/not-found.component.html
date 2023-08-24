@@ -1,0 +1,8 @@
+<div class="card-body p-4">
+    <div *ngIf="visible" class="alert alert-{{class}}" role="alert">
+        {{notFoundMessage}}
+        <a routerLink="{{resetLinkRoute}}">{{resetLinkText}}</a>
+    </div>
+</div>
+
+

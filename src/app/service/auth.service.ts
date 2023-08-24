@@ -1,19 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import jwt_decode from 'jwt-decode';
+import { UserService } from './user.service';
+import { Observable, catchError, map, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor() { }
+  constructor(private userServices :UserService) { }
 
   public setRoles(role :any){
     localStorage.setItem('role',role);
   }
   public getRoles(): string | null {
-    const rolesString = localStorage.getItem('role');
+    const rolesString = this.decodeToken(this.getAuthToken());
     
     if (rolesString) {
       return rolesString;
@@ -31,7 +33,7 @@ export class AuthService {
       }
       return false;
   }
-  public decodeToken(token:any):String|null{
+  public decodeToken(token:any):string|null{
 
     const decodedToken :any = jwt_decode(token);
 
@@ -58,6 +60,13 @@ export class AuthService {
     if (newToken !== null) {
       this.setAuthToken(newToken);
     }
+  }
+  checkToken(): boolean{
+    if (this.userServices.checkToken()) {
+      return true;
+      
+    }
+    return false;
   }
  
   public roleMatch(allowedRoles: string[]): boolean {

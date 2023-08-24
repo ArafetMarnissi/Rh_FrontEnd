@@ -16,51 +16,63 @@
             <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
             <span class="hide-menu">Home</span>
           </li>
-          <li class="sidebar-item">
-            <a class="sidebar-link" routerLink="/dashboard"aria-expanded="false">
+          <!-- <li class="sidebar-item">
+            <a class="sidebar-link" routerLink="/home"aria-expanded="false">
               <span>
                 <i class="ti ti-layout-dashboard"></i>
               </span>
-              <span class="hide-menu">Dashboard</span>
+              <span class="hide-menu">Home</span>
             </a>
-          </li>
-          <li class="nav-small-cap">
-            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-            <span class="hide-menu">UI COMPONENTS</span>
-          </li>
-          <li class="sidebar-item">
-            <a class="sidebar-link" routerLink="/button" aria-expanded="false">
+          </li> -->
+          <li *ngIf="authService.roleMatch(['ADMIN'])" class="sidebar-item">
+            <a class="sidebar-link" routerLink="/userList" aria-expanded="false">
               <span>
                 <i class="ti ti-article"></i>
               </span>
-              <span class="hide-menu">Buttons</span>
+              <span class="hide-menu">List Of Users</span>
             </a>
           </li>
-          <li class="sidebar-item">
+          <li *ngIf="authService.roleMatch(['ADMIN'])" class="sidebar-item">
+            <a class="sidebar-link" routerLink="/PointageAdmin" aria-expanded="false">
+              <span>
+                <i class="ti ti-check"></i>
+              </span>
+              <span class="hide-menu">Check-in</span>
+            </a>
+          </li>
+          <li *ngIf="authService.roleMatch(['COLLABORATEUR'])" class="sidebar-item">
+            <a class="sidebar-link" routerLink="/PointageUser" aria-expanded="false">
+              <span>
+                <i class="ti ti-check"></i>
+              </span>
+              <span class="hide-menu">Check-in</span>
+            </a>
+          </li>
+          <!-- <li class="sidebar-item">
             <a class="sidebar-link" routerLink="/alerts" aria-expanded="false">
               <span>
                 <i class="ti ti-alert-circle"></i>
               </span>
               <span class="hide-menu">Alerts</span>
             </a>
-          </li>
-          <li class="sidebar-item">
+          </li> -->
+          <!-- <li class="sidebar-item">
             <a class="sidebar-link" routerLink="/cards" aria-expanded="false">
               <span>
                 <i class="ti ti-cards"></i>
               </span>
               <span class="hide-menu">Card</span>
             </a>
-          </li>
-          <li class="sidebar-item">
-            <a class="sidebar-link" routerLink="/forms" aria-expanded="false">
+          </li> -->
+          <li *ngIf="authService.roleMatch(['COLLABORATEUR','ADMIN'])" class="sidebar-item">
+            <a class="sidebar-link" routerLink="personalProfil" aria-expanded="false">
               <span>
-                <i class="ti ti-file-description"></i>
+                <i class="ti ti-user"></i>
               </span>
-              <span class="hide-menu">Forms</span>
+              <span class="hide-menu">My Profile</span>
             </a>
           </li>
-          <li class="nav-small-cap">
+          <!-- <li class="nav-small-cap">
             <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
             <span class="hide-menu">AUTH</span>
           </li>
@@ -99,10 +111,15 @@
               </span>
               <span class="hide-menu">Sample Page</span>
             </a>
-          </li>
+          </li> -->
         </ul>
       </nav>
       <!-- End Sidebar navigation -->
     </div>
     <!-- End Sidebar scroll-->
   </aside>
+
+
+
+
+  

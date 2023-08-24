@@ -1,35 +1,16 @@
 <!--  Body Wrapper -->
+
 <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
-      data-sidebar-position="fixed" data-header-position="fixed">
+      data-sidebar-position="fixed" data-header-position="fixed" *ngIf="isloggeedIn()">
       <app-sidebar-nav/>
       <div class="body-wrapper">
           <app-header/>
         <div class="container-fluid">
-          <app-home></app-home>
-          <table class="table">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Prénom</th>
-                <th>Nom</th>
-                <th>Email</th>
-                <th>Statut</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let user of userList">
-                <td>{{ user.id }}</td>
-                <td>{{ user.firstName }}</td>
-                <td>{{ user.lastName }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.status === 'true' ? 'Actif' : 'Inactif' }}</td>
-                <td><button>change Status</button></td>
-              </tr>
-            </tbody>
-          </table>
+          <app-home *ngIf="app.affichageHome === true"></app-home>
         </div>
       </div>
+      
+      
 </div>
 
 

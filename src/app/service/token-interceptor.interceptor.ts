@@ -32,6 +32,8 @@ export class TokenInterceptorInterceptor implements HttpInterceptor {
           alert("forbiden access");
           localStorage.clear();
           this.router.navigate(['/login']);
+        }else if(err.status === 400 ){
+          return throwError(err.error.message);
         } 
       
       return throwError("Something is Wrong");

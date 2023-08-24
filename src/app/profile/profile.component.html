@@ -1,0 +1,59 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+    <span>Edit Profile</span>
+    <button class="mat-dialog-close" mat-icon-button mat-dialog-close="refresh">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+
+<div class="body-wrapper">
+   
+   <div class="container-fluid">
+     <div class="container-fluid">
+       <div class="card">
+         <div class="card-body">
+           <div class="card">
+            <app-not-found [visible]="responseMessage" notFoundMessage="{{responseMessage}}" resetLinkText ="" class="success"></app-not-found>
+             <div class="card-body">
+               <form [formGroup]="profileForm" (ngSubmit)="onSubmitUpdateProfile()">
+                 <div class="mb-3">
+                   <label  class="form-label">First Name :</label>
+                   <input type="text" class="form-control"  aria-describedby="emailHelp" formControlName="firstName">
+                   <span class="form-text text-danger" *ngIf="FirstName.errors?.['required'] && FirstName.touched">first name is required</span>
+                    <span class="form-text text-danger" *ngIf="FirstName.errors?.['pattern']">first name is invalid</span>
+                 </div>
+                 <div class="mb-3">
+                    <label  class="form-label">Last Name :</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="lastName">
+                    <span class="form-text text-danger" *ngIf="LastName.errors?.['required'] && LastName.touched">last name is required</span>
+                    <span class="form-text text-danger" *ngIf="LastName.errors?.['pattern']">last name is invalid</span>
+                  </div>
+                  <div class="mb-3">
+                    <label  class="form-label">Email :</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="email">
+                    <span class="form-text text-danger" *ngIf="Email.errors?.['required']&& Email.touched">email is required</span>
+                    <span class="form-text text-danger" *ngIf="Email.errors?.['pattern']">Email is invalid</span>
+                    <span class="form-text text-danger" *ngIf="Email.errors?.['emailTaken']">Email is already taken</span>
+                  </div>
+                  <div class="mb-3">
+                    <label  class="form-label">Status :</label>
+                    <span *ngIf="status" class="badge text-bg-success">Activated</span>
+                    <span *ngIf="!status" class="badge text-bg-danger">Blocked</span>
+                  </div>
+                 <button type="submit" [disabled]="!(profileForm.valid && profileForm.dirty)" class="btn btn-primary">Edit</button>
+               </form>
+             </div>
+           </div>
+         </div>
+         <!-- <div mat-dialog-actions>
+            <button class="btn btn-danger ml-5 " mat-button mat-dialog-close="refresh" cdkFocusInitial>close</button>
+          </div> -->
+       </div>
+      
+     </div>
+   
+   </div>
+
+ </div>

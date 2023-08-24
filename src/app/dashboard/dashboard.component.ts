@@ -8,9 +8,10 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { SnackbarService } from '../service/snackbar.service';
 import { GlobalConstants } from '../shared/global-constants';
 import { AxiosService } from '../axios.service';
-import { User } from '../user';
+import { User } from '../shared/model/user';
 import { UserService } from '../service/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from '../service/auth.service';
 
 
 @Component({
@@ -18,26 +19,30 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements AfterViewInit {
+export class DashboardComponent implements OnInit {
   responseMessage:any="hhhhhhhhhhhhhhh";
   data:any;
   userList : User[]= [];
-  ngAfterViewInit(): void {
-   // this.dashbordData();
-
-  }
+ 
   constructor(private dashboardService:DashboardService,
     private axiosService:AxiosService,
     private ngxService: NgxUiLoaderService,
     
     private snackbarService:SnackbarService,
     private userService:UserService,
-    private snackBarSer: MatSnackBar){
+    private snackBarSer: MatSnackBar,
+    public app:AppServiceService,
+    public authService :AuthService
+    ){
       
-      this.dashbordData();
-      
-
     }
+    isloggeedIn(){
+      return this.authService.isAuthenticated();
+    }
+  ngOnInit(): void {
+    this.app.affichageHome=true
+    
+  }
     // dashbordData() {
     //   this.axiosService.request(
     //     "GET",
@@ -59,14 +64,8 @@ export class DashboardComponent implements AfterViewInit {
     //   });}
     // }
     
-  dashbordData() {
-    this.dashboardService.getAllUser().subscribe((response:any)=>{
-      this.userList = response;
-      
-    },(error:any)=>{
-      console.log(error);
-    });
-  }}
+ 
+  }
    
 
   

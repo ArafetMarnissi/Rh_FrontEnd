@@ -1,14 +1,12 @@
 
 
-
- <!-- Body Wrapper
-<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
-      data-sidebar-position="fixed" data-header-position="fixed" *ngIf="this.app.affichage=='true'">
+<!-- <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+      data-sidebar-position="fixed" data-header-position="fixed" *ngIf="this.app.affichage==true">
       <app-sidebar-nav/>
       <div class="body-wrapper">
           <app-header/>
         <div class="container-fluid">
-          <app-home *ngIf="app.affichageHome === 'true'"></app-home>
+          <app-home *ngIf="app.affichageHome === true"></app-home>
         </div>
       </div>
       
@@ -32,8 +30,14 @@
 <!-- <app-login ></app-login> -->
 <!-- <app-dashboard/> -->
 <!-- <app-login *ngIf="! isLoggedIn()"/> -->
+<!-- <app-pointage-list-admin/> -->
+<app-dashboard/>
+
 <router-outlet/>
 <ngx-ui-loader></ngx-ui-loader>
+
+
+
 
 
 

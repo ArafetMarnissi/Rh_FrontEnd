@@ -1,0 +1,49 @@
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+    data-sidebar-position="fixed" data-header-position="fixed">
+<div class="body-wrapper">
+   
+    <div class="container-fluid">
+      <div class="container-fluid">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title fw-semibold mb-4">My profile</h5>
+            <div class="card">
+             <app-not-found [visible]="responseMessage" notFoundMessage="{{responseMessage}}" resetLinkText ="" class="success"></app-not-found>
+              <div class="card-body">
+                <form [formGroup]="profileForm" (ngSubmit)="onSubmitUpdateProfile()">
+                  <div class="mb-3">
+                    <label  class="form-label">First Name :</label>
+                    <input type="text" class="form-control"  aria-describedby="emailHelp" formControlName="firstName" >
+                    <span class="form-text text-danger" *ngIf="FirstName.errors?.['required'] && FirstName.touched">First name is required</span>
+                     <span class="form-text text-danger" *ngIf="FirstName.errors?.['pattern']">First name is invalid</span>
+                  </div>
+                  <div class="mb-3">
+                     <label  class="form-label">Last Name :</label>
+                     <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="lastName">
+                     <span class="form-text text-danger" *ngIf="LastName.errors?.['required'] && LastName.touched">last name is required</span>
+                     <span class="form-text text-danger" *ngIf="LastName.errors?.['pattern']">Last name is invalid</span>
+                   </div>
+                   <div class="mb-3">
+                     <label  class="form-label">Email :</label>
+                     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="email">
+                     <span class="form-text text-danger" *ngIf="Email.errors?.['required']&& Email.touched">Email is required</span>
+                     <span class="form-text text-danger" *ngIf="Email.errors?.['pattern']">Email is invalid</span>
+                     <span class="form-text text-danger" *ngIf="Email.errors?.['emailTaken']">Email is already taken</span>
+                   </div>
+                   <div class="mb-3">
+                     <label  class="form-label">Role : </label>
+                     <span class="badge text-bg-success"> {{this.authService.getRoles()}}</span>
+                   </div>
+                  <button type="submit" [disabled]="!(profileForm.valid && profileForm.dirty)" class="btn btn-primary">Edit</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+       
+      </div>
+    
+    </div>
+ </div>
+  </div>
+ 

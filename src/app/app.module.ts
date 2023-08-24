@@ -26,7 +26,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppServiceService } from './service/app-service.service';
 import { LoginComponent } from './login/login.component';
 import { NgxUiLoaderConfig, NgxUiLoaderModule, SPINNER } from 'ngx-ui-loader';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { TokenInterceptorInterceptor } from './service/token-interceptor.interceptor';
 import { RouteGuardService } from './service/route-guard.service';
@@ -34,14 +34,34 @@ import { AuthService } from './service/auth.service';
 import { DashboardService } from './service/dashboard.service';
 import { AxiosService } from './axios.service';
 import { UserService } from './service/user.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MaterialModule } from './shared/material-module';
+import { NotFoundComponent } from './not-found/not-found.component';
+import UserListComponent from './user-list/user-list.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { SharedModule } from './shared/shared.module';
+import { DatePickerComponent } from './shared/date-picker/date-picker.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatPseudoCheckboxModule } from '@angular/material/core';
+import { DatePipe } from '@angular/common';
+import { PointageListAdminComponent } from './pointage-list-admin/pointage-list-admin.component';
+import { PointageListUserComponent } from './pointage-list-user/pointage-list-user.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { ProfileComponent } from './profile/profile.component';
+import { PersonalProfilComponent } from './personal-profil/personal-profil.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { CreateNewPasswordComponent } from './create-new-password/create-new-password.component';
 
 
 const ngxUiLoaderConfig:NgxUiLoaderConfig={
   text:"loading ...",
   textColor:"#FFFFFF",
   textPosition:"center-center",
-  bgsColor:"#7b1fa2",
-  fgsColor:"#7b1fa2",
+  bgsColor:"#0d6efd",
+  fgsColor:"#0d6efd",
   fgsType:SPINNER.squareJellyBox,
   fgsSize:100,
   hasProgressBar:false
@@ -67,9 +87,23 @@ const ngxUiLoaderConfig:NgxUiLoaderConfig={
     SidebarNavComponent,
     HomeComponent,
     DashboardComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    NotFoundComponent,
+    UserListComponent,
+    PointageListUserComponent,
+    PointageListAdminComponent,
+    ProfileComponent,
+    PersonalProfilComponent,
+    ChangePasswordComponent,
+    CreateNewPasswordComponent,
+    
+    
+    
+
+    
   ],
   imports: [
+    BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
@@ -77,10 +111,22 @@ const ngxUiLoaderConfig:NgxUiLoaderConfig={
     ReactiveFormsModule,
     HttpClientModule,
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
+    MatSnackBarModule,
+    MatDialogModule,
+    MatSlideToggleModule,
+    MatDatepickerModule,
+    MaterialModule,
+    SharedModule,
+    DatePickerComponent,
+    
+    
+    MatPseudoCheckboxModule,
+    MatTableModule, MatPaginatorModule,DatePickerComponent
+
+
   ],
   providers: [
     AppServiceService,
-    MatSnackBar,
     ValidationService,
     HttpClientModule,
     RouteGuardService,
@@ -92,7 +138,10 @@ const ngxUiLoaderConfig:NgxUiLoaderConfig={
     AuthService,
     DashboardService,
     AxiosService,
-    UserService
+    UserService,
+    MatDialog,
+    DatePipe,
+    NotFoundComponent
   ],
   bootstrap: [AppComponent]
 })

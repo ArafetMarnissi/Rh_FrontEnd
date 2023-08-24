@@ -1,0 +1,84 @@
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+    data-sidebar-position="fixed" data-header-position="fixed">
+
+    <app-not-found [visible]="responseMessage=='wait for admin approval'" notFoundMessage="wait for admin approval !" resetLinkText ="" class="danger"></app-not-found>
+    <div class="body-wrapper">
+
+        <div class="container-fluid">
+            <mat-card>
+                <mat-form-field>
+                    <mat-label>Filter</mat-label>
+                    <input matInput (keyup)="applyFilter($event)" #input>
+                </mat-form-field>
+            </mat-card>
+            <hr>
+            <app-date-picker></app-date-picker>
+            <div class="mat-elevation-z8">
+                <table mat-table [dataSource]="dataSource">
+
+                    <!-- ID Column -->
+                    <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef> ID </th>
+                        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                    </ng-container>
+
+                    <!-- Email Column -->
+                    <ng-container matColumnDef="email">
+                        <th mat-header-cell *matHeaderCellDef> Email </th>
+                        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                    </ng-container>
+
+                    <!-- First Name Column -->
+                    <ng-container matColumnDef="firstName">
+                        <th mat-header-cell *matHeaderCellDef> First Name </th>
+                        <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+                    </ng-container>
+
+                    <!-- Date Pointage Column -->
+                    <ng-container matColumnDef="datePointage">
+                        <th mat-header-cell *matHeaderCellDef> Date of registration </th>
+                        <td mat-cell *matCellDef="let element"> {{element.datePointage}} </td>
+                    </ng-container>
+
+                    <!-- Heure Matin Column -->
+                    <ng-container matColumnDef="heureMatin">
+                        <th mat-header-cell *matHeaderCellDef> Morning check-in  </th>
+                        <td mat-cell *matCellDef="let element"> {{element.heureMatin}} </td>
+                    </ng-container>
+
+                    <!-- Heure Apres Midi Column -->
+                    <ng-container matColumnDef="heureApresMidi">
+                        <th mat-header-cell *matHeaderCellDef> Afternoon check-in </th>
+                        <td mat-cell *matCellDef="let element"> {{element.heureApresMidi}} </td>
+                    </ng-container>
+
+                    <!-- Heure Retour Column -->
+                    <ng-container matColumnDef="heureRetour">
+                        <th mat-header-cell *matHeaderCellDef> Return check-in </th>
+                        <td mat-cell *matCellDef="let element"> {{element.heureRetour}} </td>
+                    </ng-container>
+
+                    <!-- Heure Depart Column -->
+                    <ng-container matColumnDef="heureDepart">
+                        <th mat-header-cell *matHeaderCellDef> Check-out </th>
+                        <td mat-cell *matCellDef="let element"> {{element.heureDepart}} </td>
+                    </ng-container>
+                    <!-- Action -->
+                    <ng-container matColumnDef="update">
+                        <th mat-header-cell *matHeaderCellDef> Update </th>
+                        <td mat-cell *matCellDef="let element">
+                            <button class="btn btn-primary m-1" (click)="updateRecord(element.id)">Edit</button>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+
+                <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+                    aria-label="Select page of periodic elements">
+                </mat-paginator>
+            </div>
+        </div>
+    </div>
+</div>

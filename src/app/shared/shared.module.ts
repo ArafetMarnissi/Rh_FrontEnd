@@ -1,19 +1,26 @@
 import { NgModule } from '@angular/core';
 
 import { AccordionAnchorDirective, AccordionLinkDirective, AccordionDirective } from './accordion';
+import { DatePickerComponent } from './date-picker/date-picker.component';
 
 
 @NgModule({
+imports:[
+  DatePickerComponent
+],
+
   declarations: [
     AccordionAnchorDirective,
     AccordionLinkDirective,
-    AccordionDirective
+    AccordionDirective,
+   
   ],
   exports: [
     AccordionAnchorDirective,
     AccordionLinkDirective,
-    AccordionDirective
+    AccordionDirective,
+    
    ],
-  providers: [ ]
+  providers: []
 })
 export class SharedModule { }

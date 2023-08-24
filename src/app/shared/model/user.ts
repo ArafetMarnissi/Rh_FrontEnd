@@ -1,6 +1,6 @@
 export class User {
     
-id : Number | undefined;
+    id !: Number;
     firstName!: String;
     lastName!: String;
     email!: String;

@@ -28,8 +28,8 @@ export class RouteGuardService implements CanActivate {
           if (match) {
             return true;
           } else {
-            alert("Accès interdit");
-            this.router.navigate(['/login']);
+            alert("Forbiden Access !");
+           // this.router.navigate(['/login']);
             return false;
           }
         }

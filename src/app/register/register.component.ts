@@ -11,6 +11,7 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { GlobalConstants } from '../shared/global-constants';
 import { MatDialogRef } from '@angular/material/dialog';
 import { UserService } from '../service/user.service';
+import { AuthService } from '../service/auth.service';
 
 
 @Component({
@@ -32,6 +33,7 @@ export class RegisterComponent implements OnInit {
     private ngxService: NgxUiLoaderService,
     private formBuilder: FormBuilder,
     private snackBarSer: SnackbarService,
+    private authService : AuthService
     
 
   ) { }
@@ -50,6 +52,15 @@ export class RegisterComponent implements OnInit {
     };
   }
   ngOnInit(): void {
+    if( this.authService.getAuthToken()!=null){
+      if(this.authService.roleMatch(['ADMIN'])){
+              
+        this.router.navigateByUrl('userList'); // Naviguez vers la nouvelle route en cas de succès
+       }else{
+        this.router.navigateByUrl('PointageUser'); // Naviguez vers la nouvelle route en cas de succès
+       }
+  
+     }
     this.app.affichage = false;
 
     this.signupForm = this.formBuilder.group({

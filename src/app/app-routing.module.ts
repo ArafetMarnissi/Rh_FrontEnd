@@ -22,7 +22,6 @@ import { CreateNewPasswordComponent } from './create-new-password/create-new-pas
 
 const routes: Routes = [
  {path :'login' , component:LoginComponent },
- {path :'home' , component:HomeComponent },
  {path :'register' , component:RegisterComponent },
  {path :'button' , component:UiButtonsComponent ,canActivate:[RouteGuardService],data:{roles:['COLLABORATEUR','ADMIN']}},
  {path :'userList' , component:UserListComponent ,canActivate:[RouteGuardService],data:{roles:['ADMIN']}},
@@ -32,12 +31,13 @@ const routes: Routes = [
  {path :'personalProfil' , component:PersonalProfilComponent, canActivate:[RouteGuardService],data:{roles:['COLLABORATEUR','ADMIN']} },
  {path :'alerts' , component:UiAlertsComponent },
  {path :'cards' , component:UiCardComponent },
- {path:'dashboard', component:DashboardComponent, canActivate:[RouteGuardService],data:{roles:['COLLABORATEUR','ADMIN']}},
+//  {path:'dashboard', component:DashboardComponent, canActivate:[RouteGuardService],data:{roles:['COLLABORATEUR','ADMIN']}},
  {path:'forgotPassword', component:ForgotPasswordComponent},
  {path:'PointageAdmin?date=', component:PointageListAdminComponent ,canActivate:[RouteGuardService],data:{roles:['ADMIN']}},
  {path :'PointageUser' , component:PointageListUserComponent ,canActivate:[RouteGuardService],data:{roles:['COLLABORATEUR']}},
  {path:'PointageUser?date=', component:PointageListUserComponent ,canActivate:[RouteGuardService],data:{roles:['COLLABORATEUR']}},
  {path: 'createnewPassword', component: CreateNewPasswordComponent },
+ { path: '**', component: HomeComponent }
 
 ];
 

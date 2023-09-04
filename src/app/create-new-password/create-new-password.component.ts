@@ -38,6 +38,9 @@ export class CreateNewPasswordComponent implements OnInit{
   validity:any
   
   ngOnInit(): void {
+    if(this.authService.isAuthenticated()){
+      localStorage.clear()
+    }
 
     this.route.queryParams.subscribe(params => {
       const token = params['token'];

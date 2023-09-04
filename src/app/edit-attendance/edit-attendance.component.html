@@ -1,0 +1,45 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+      <span>Edit Check </span>
+      <button class="mat-dialog-close" mat-icon-button mat-dialog-close="refresh">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  
+  
+  <div class="body-wrapper">
+     
+     <div class="container-fluid">
+       <div class="container-fluid">
+         <div class="card">
+           <div class="card-body">
+              <app-not-found [visible]="responseMessage" notFoundMessage="{{responseMessage}}" resetLinkText ="" [class]="responseMessage !== 'Check updated seccessfuly' ? 'danger' : 'success'"></app-not-found>
+               <div class="card-body">
+                 <form [formGroup]="EditAttendanceForm" (ngSubmit)="onSubmitUpdateAttendance()">
+                   <div class="mb-2">
+                     <label  class="form-label">Check-in :</label>
+                     <input type="time" class="form-control"   formControlName="entrer">
+                     
+                     
+                     <!-- <span class="form-text text-danger" *ngIf="FirstName.errors?.['required'] && FirstName.touched">first name is required</span> -->
+                      
+                   </div>
+                   <div class="mb-2">
+                      <label  class="form-label">Check-out :</label>
+                      <input type="time" class="form-control" id="exampleInputEmail1"  formControlName="sortie">
+                      <!-- <span class="form-text text-danger" *ngIf="LastName.errors?.['required'] && LastName.touched">last name is required</span> -->
+                     
+                    </div>
+                    
+                   <button type="submit" [disabled]="!(EditAttendanceForm.valid && EditAttendanceForm.dirty)" class="btn btn-primary">Edit</button>
+                 </form>
+               </div>
+             </div>
+           </div>
+         </div>
+        
+       </div>
+     
+     </div>
+  

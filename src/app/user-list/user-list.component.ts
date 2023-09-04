@@ -121,24 +121,7 @@ export default class UserListComponent implements OnInit {
       
     })
   }
-  // updateStatus(id:any){
-  //   this.ngxservice.start()
-  //   const credentials={id: id}
-  //   this.axiosService.request(
-  //     "POST",
-  //     "/api/user/update", credentials, true
-  //   ).then(response => {
-  //     this.ngxservice.stop()
-  //     console.log(response.data.message);
-  //     this.ListUser();
-  //     this.responseMessage=response.data.message
-  //   }, (error) => {
-  //     this.ngxservice.stop()
-  //     this.responseMessage="error"
-  //     console.log(error);
-
-  //   });
-  // }
+ 
   modifierUser(id:any){
     const dialogRef = this.dialog.open(ProfileComponent, {
       width: '750px',

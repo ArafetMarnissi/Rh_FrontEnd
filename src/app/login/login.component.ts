@@ -36,21 +36,48 @@ export class LoginComponent  implements OnInit {
     private userService :UserService
     ){}
   ngOnInit() {
-      if (this.authService.checkToken() === true) {
-        this.router.navigateByUrl('dashboard');
-      }
-    
-   
-    
-    
-    
-    
-    
-    // this.validationService.checkToken().subscribe((response :any) =>{
-    //   this.router.navigate(['dashboard']);
+
+    // this.userService.checkToken().subscribe((response :any)=>{
+    //   if (response.message==="true") {
+    //     if(this.authService.roleMatch(['ADMIN'])){
+    //       this.router.navigateByUrl('userList');
+    //     }else
+    //     this.router.navigateByUrl('PointageUser');
+    //   }
     // },(error:any)=>{
     //   console.log(error);
-    // }) 
+      
+    // })
+   if( this.authService.getAuthToken()!=null){
+    if(this.authService.roleMatch(['ADMIN'])){
+            
+      this.router.navigateByUrl('userList'); // Naviguez vers la nouvelle route en cas de succès
+     }else{
+      this.router.navigateByUrl('PointageUser'); // Naviguez vers la nouvelle route en cas de succès
+     }
+
+   }
+
+    // this.axiosService.request(
+    //       "GET",
+    //       "/api/user/checkToken","",true
+    //     ).then(response => {
+          
+    //        if(this.authService.roleMatch(['ADMIN'])){
+            
+    //         this.router.navigateByUrl('userList'); // Naviguez vers la nouvelle route en cas de succès
+    //        }else{
+    //         this.router.navigateByUrl('PointageUser'); // Naviguez vers la nouvelle route en cas de succès
+    //        }
+           
+          
+    //     }).catch(error => {
+    //         if(error.response.status==403){
+    //           return;
+    //         }
+            
+    //         })
+    
   
     this.app.affichage=false;
 

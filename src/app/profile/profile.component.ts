@@ -41,16 +41,9 @@ export class ProfileComponent implements OnInit{
   responseMessage: any="";
   ngOnInit(): void {
     
-   //this.app.affichageHome=false;
-
-  //  this.route.params.subscribe(params => {
-  //     this.idUser = params['id'];
-  //   console.log(this.idUser);
-    
-  //   });
 console.log(this.data['id']);
 
-    this.getUserDetails(this.data['id']);
+    // this.getUserDetails(this.data['id']);
       
 
    this.profileForm = this.formBuilder.group({
@@ -59,6 +52,7 @@ console.log(this.data['id']);
     email: ['', [Validators.required, Validators.pattern(GlobalConstants.emailRegex)], this.validateEmailUniqueness()],
 
   })
+  this.getUserDetails(this.data['id']);
   }
 
   getUserDetails(id:any){

@@ -34,5 +34,10 @@ export class DashboardService {
     const requestPayload = { id: id };
     return this.httpClient.post(this.baseUrl +"/api/user/update",requestPayload)
   }
-  
+  updateAttendance(data:any){
+    return this.httpClient.post(this.baseUrl +"/api/pointage/EditPoinatge",data)
+  }
+  getAttendanceChecksById(id:number){
+    return this.httpClient.get(this.baseUrl + '/api/pointage/GetChecksByAttendance?attendance_id='+id);
+  }
 }

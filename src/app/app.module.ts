@@ -54,6 +54,9 @@ import { ProfileComponent } from './profile/profile.component';
 import { PersonalProfilComponent } from './personal-profil/personal-profil.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { CreateNewPasswordComponent } from './create-new-password/create-new-password.component';
+import { EditAttendanceComponent } from './edit-attendance/edit-attendance.component';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import { ChecksDetailsComponent } from './checks-details/checks-details.component';
 
 
 const ngxUiLoaderConfig:NgxUiLoaderConfig={
@@ -96,6 +99,8 @@ const ngxUiLoaderConfig:NgxUiLoaderConfig={
     PersonalProfilComponent,
     ChangePasswordComponent,
     CreateNewPasswordComponent,
+    EditAttendanceComponent,
+    ChecksDetailsComponent,
     
     
     
@@ -118,6 +123,7 @@ const ngxUiLoaderConfig:NgxUiLoaderConfig={
     MaterialModule,
     SharedModule,
     DatePickerComponent,
+    NgxMaterialTimepickerModule,
     
     
     MatPseudoCheckboxModule,
@@ -141,7 +147,8 @@ const ngxUiLoaderConfig:NgxUiLoaderConfig={
     UserService,
     MatDialog,
     DatePipe,
-    NotFoundComponent
+    NotFoundComponent,
+    
   ],
   bootstrap: [AppComponent]
 })

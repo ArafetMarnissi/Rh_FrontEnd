@@ -11,6 +11,8 @@ import { DatePickerComponent } from '../shared/date-picker/date-picker.component
 import { ActivatedRoute } from '@angular/router';
 import { AxiosService } from '../axios.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { MatDialog } from '@angular/material/dialog';
+import { ChecksDetailsComponent } from '../checks-details/checks-details.component';
 
 @Component({
   selector: 'app-pointage-list-user',
@@ -18,7 +20,7 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
   styleUrls: ['./pointage-list-user.component.css'],
 })
 export class PointageListUserComponent implements AfterViewInit {
-  displayedColumns: string[] = ['datePointage', 'heureMatin', 'heureApresMidi', 'heureRetour', 'heureDepart'];
+  displayedColumns: string[] = ['datePointage', 'is_checked', 'workTime','Action'];
   dataSource = new MatTableDataSource<any>();
   responseMessage: any="";
 
@@ -30,7 +32,8 @@ export class PointageListUserComponent implements AfterViewInit {
     public app :AppServiceService,
     private route:ActivatedRoute,
     private axiosService:AxiosService,
-    private ngxService:NgxUiLoaderService
+    private ngxService:NgxUiLoaderService,
+    public dialog: MatDialog,
     ) {
       this.app.affichageHome=false;
     }
@@ -51,13 +54,10 @@ export class PointageListUserComponent implements AfterViewInit {
   PointageData() {
     this.dashboardService.getAllPointageUser().subscribe(
       (response: any) => {
+        
         this.dataSource.data = response.map((item:any) => ({
           ...item,
-          datePointage: this.datePipe.transform(new Date(item.datePointage[0], item.datePointage[1] - 1, item.datePointage[2]), 'yyyy-MM-dd'),
-          heureMatin: item.heureMatin ? this.datePipe.transform(new Date(0, 0, 0, item.heureMatin[0], item.heureMatin[1]), 'HH:mm') : '-',
-          heureApresMidi: item.heureApresMidi ? this.datePipe.transform(new Date(0, 0, 0, item.heureApresMidi[0], item.heureApresMidi[1]), 'HH:mm') : '-',
-          heureRetour: item.heureRetour ? this.datePipe.transform(new Date(0, 0, 0, item.heureRetour[0], item.heureRetour[1]), 'HH:mm') : '-',
-          heureDepart: item.heureDepart ? this.datePipe.transform(new Date(0, 0, 0, item.heureDepart[0], item.heureDepart[1]), 'HH:mm') : '-'
+          datePointage: this.datePipe.transform(new Date(item.datePointage[0], item.datePointage[1] - 1, item.datePointage[2]), 'EEEE-MMMM-y')
         }));
       },
       (error: any) => {
@@ -72,11 +72,7 @@ export class PointageListUserComponent implements AfterViewInit {
       (response: any) => {
         this.dataSource.data = response.map((item:any) => ({
           ...item,
-          datePointage: this.datePipe.transform(new Date(item.datePointage[0], item.datePointage[1] - 1, item.datePointage[2]), 'yyyy-MM-dd'),
-          heureMatin: item.heureMatin ? this.datePipe.transform(new Date(0, 0, 0, item.heureMatin[0], item.heureMatin[1]), 'HH:mm') : '-',
-          heureApresMidi: item.heureApresMidi ? this.datePipe.transform(new Date(0, 0, 0, item.heureApresMidi[0], item.heureApresMidi[1]), 'HH:mm') : '-',
-          heureRetour: item.heureRetour ? this.datePipe.transform(new Date(0, 0, 0, item.heureRetour[0], item.heureRetour[1]), 'HH:mm') : '-',
-          heureDepart: item.heureDepart ? this.datePipe.transform(new Date(0, 0, 0, item.heureDepart[0], item.heureDepart[1]), 'HH:mm') : '-'
+          datePointage: this.datePipe.transform(new Date(item.datePointage[0], item.datePointage[1] - 1, item.datePointage[2]), 'EEEE-MMMM-y')
         }));
       },
       (error: any) => {
@@ -107,19 +103,25 @@ export class PointageListUserComponent implements AfterViewInit {
     );
     
   }
-  // onSubmitPointer(): void {
-  //   this.axiosService.request(
-  //     "GET",
-  //     "/api/pointage/pointer", "", true
-  //   ).then(response => {
-  //     alert ("Pointage ajouté avec succés")
-      
-  //     alert(response.data);
-  //   }, (error) => {
-  //     console.log(error);
 
-  //   });
-  // }
+  getAttendanceById(id: number) {
+    return this.dataSource.data.find(item => item.id === id);
+  }
+
+  viewDetailsChecks(id :number){
+    const dataToPass :any = this.getAttendanceById(id)
+      const dialogRef = this.dialog.open(ChecksDetailsComponent, {
+        width: '750px',
+        disableClose: false,
+        data: dataToPass
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'refresh') {
+        this.PointageData(); // Appelez votre méthode pour rafraîchir les données
+      }
+  });
+
+  }
 
 }
 
